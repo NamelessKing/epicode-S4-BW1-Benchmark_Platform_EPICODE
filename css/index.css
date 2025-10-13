@@ -1,0 +1,37 @@
+main {
+  padding-left: 200px;
+}
+h1 {
+  padding-top: 100px;
+  font-size: 130px;
+}
+.special-h2 {
+  color: #d20094;
+  font-weight: 700;
+  font-size: xxx-large;
+  margin-top: 60px;
+  margin-bottom: 15px;
+}
+p {
+  font-size: x-large;
+  margin-bottom: 50px;
+}
+li {
+  font-size: x-large;
+  line-height: 40px;
+}
+footer {
+  padding-left: 200px;
+  margin-top: 75px;
+}
+#checkbox {
+  width: 20px;
+  height: 20px;
+}
+label {
+  margin-left: 10px;
+  font-size: larger;
+}
+button {
+  margin-left: 700px;
+}
