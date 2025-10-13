@@ -9,13 +9,29 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;800&family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./css/reset.css"/>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
-  <body>
     <main id="app" class="app" aria-live="polite"></main>
-
-    <h1>Test</h1>
-
+    <h1>Welcome to your exam</h1>
+    <h2>Instruction</h2>
+    <p>
+      We don't expect most engineers to know the answers to all of these
+      questions, so don't worry if you're unsure of a few of them.
+    </p>
+    <ul>
+      <li>Each question is timed and can only be answered once.</li>
+      <li>
+        Changing browser tab or opening other windows will invalidate the
+        question.
+      </li>
+      <li>This exam will take approx. 0-5 minutes.</li>
+    </ul>
+    <form>
+    <input type="checkbox" id="checkbox" required>
+    <label for="checkbox">I promise to answer myself without help from anyone</label>
+    <button>PROCEED</button>
+    </form>
     <script type="module"></script>
   </body>
 </html>
