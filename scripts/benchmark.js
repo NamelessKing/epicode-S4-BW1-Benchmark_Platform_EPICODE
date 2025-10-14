@@ -62,10 +62,25 @@ function showQuestion(index) {
   answers = answers.sort(() => Math.random() - 0.5); // Mischia le risposte in modo casuale
 
   answersEl.innerHTML = ""; // Svuota il contenitore delle risposte
+
+  // Imposta il grid dinamicamente
+  if (answers.length === 2) {
+    answersEl.style.display = "grid";
+    answersEl.style.gridTemplateColumns = "1fr 1fr";
+    answersEl.style.gridTemplateRows = "1fr";
+  } else if (answers.length === 4) {
+    answersEl.style.display = "grid";
+    answersEl.style.gridTemplateColumns = "1fr 1fr";
+    answersEl.style.gridTemplateRows = "1fr 1fr";
+  } else {
+    answersEl.style.display = "block";
+  }
+
   answers.forEach((answer) => {
     const btn = document.createElement("button"); // Crea un bottone per ogni risposta
     btn.textContent = answer; // Mostra il testo della risposta sul bottone
-    btn.onclick = () => handleAnswer(answer, q.correct_answer); // Quando clicchi, controlla se è giusta
+    btn.classList.add("answers"); // Applica la classe CSS
+    btn.onclick = () => handleAnswer(btn, answer, q.correct_answer); // Quando clicchi, controlla se è giusta
     answersEl.appendChild(btn); // Aggiunge il bottone al contenitore
   });
   startTimer(); // Avvia il timer per ogni domanda
@@ -82,9 +97,17 @@ export function nextQuestion() {
 }
 
 // Gestisce la risposta dell'utente
-function handleAnswer(selected, correct) {
-  if (selected === correct) score++; // Se la risposta è giusta, aumenta il punteggio
-  nextQuestion(); // Passa subito alla prossima domanda
+function handleAnswer(btn, selected, correct) {
+  // Disabilita tutti i bottoni e rimuovi la classe selected
+  Array.from(answersEl.children).forEach((b) => {
+    b.disabled = true;
+    b.classList.remove("selected");
+  });
+
+  btn.classList.add("selected"); // Evidenzia il bottone cliccato
+
+  if (selected === correct) score++;
+  setTimeout(nextQuestion, 800); // Passa alla prossima domanda dopo breve feedback
 }
 
 // Mostra il risultato finale del quiz
@@ -110,7 +133,7 @@ export function showResult() {
   answersEl.innerHTML = "";
 
   // Vai alla pagina dei risultati
-  window.location.href = "results.html";
+  //window.location.href = "results.html";
 }
 
 // Funzione che può essere chiamata dal timer per ricominciare il quiz
