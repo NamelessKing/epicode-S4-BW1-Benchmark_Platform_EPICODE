@@ -1,5 +1,5 @@
 #logo {
-  margin-left: none;
+  margin-left: 0;
 }
 .titolo {
   color: #ffffff;
@@ -21,7 +21,7 @@
 .grafico {
   width: 350px;
   height: 350px;
-  background: conic-gradient(#00e5ff 0% 66.7%, #ff4ec6 66.7% 100%);
+  background: conic-gradient( #00e5ff 0% 66.7%, #ff4ec6 66.7% 100%,);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -40,6 +40,7 @@
 .risultatiDx {
   color: #dcd2e1;
   font-size: 32px;
+  text-align: right;
 }
 .correct {
   color: #00e5ff;
@@ -92,13 +93,13 @@
   font-weight: lighter;
 }
 .percentuale-sbagliata {
-  color: #00e5ff;
+  color: #ff4ec6;
   font-size: 50px;
   font-weight: bolder;
 }
 
 .percentuale-corretta {
-  color: #ff4ec6;
+  color: #00e5ff;
   font-size: 50px;
   font-weight: bolder;
 }
