@@ -1,0 +1,130 @@
+#logo {
+  margin-left: none;
+}
+.titolo {
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sottotitolo {
+  color: #cfcfcf;
+  margin-bottom: 47px;
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.grafico {
+  width: 350px;
+  height: 350px;
+  background: conic-gradient(#00e5ff 0% 66.7%, #ff4ec6 66.7% 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.risultati-riga {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.risultatiDx {
+  color: #dcd2e1;
+  font-size: 32px;
+}
+.correct {
+  color: #00e5ff;
+  font-size: 32px;
+  font-weight: bold;
+}
+.circle-container {
+  width: 310px;
+  height: 310px;
+  background: conic-gradient(#00e5ff 0% 66.7%, #ff4ec6 66.7% 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-inner {
+  background: #0e0c2b;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  text-align: center;
+}
+
+.circle-inner p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.circle-inner span {
+  color: #00e5ff;
+  font-weight: bold;
+}
+
+.circle-inner small {
+  color: #ccc;
+  font-size: 13px;
+}
+.dettagli-dx {
+  color: #aaa;
+  font-weight: lighter;
+}
+.dettagli-dx {
+  color: #ffffff;
+  font-weight: lighter;
+}
+.percentuale-sbagliata {
+  color: #00e5ff;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.percentuale-corretta {
+  color: #ff4ec6;
+  font-size: 50px;
+  font-weight: bolder;
+}
+footer button {
+  background: transparent;
+  color: #ffffff;
+  border: 2px solid white;
+  font-size: 1.3em;
+  text-align: center;
+  font-weight: bold;
+  height: 60px;
+  width: 200px;
+  box-shadow: 0px 0px 20px 10px rgba(0, 255, 255, 0.1);
+  -webkit-box-shadow: 0px 0px 20px 10px rgba(0, 255, 255, 0.1);
+  -moz-box-shadow: 0px 0px 20px 10px rgba(0, 255, 255, 0.1);
+  cursor: pointer;
+  transition: 0.3s ease;
+ 
+}
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   margin-bottom: 50px;
+}
+.rate:hover {
+  background: #00ffff;
+  color: #0e0c2b;
+}
