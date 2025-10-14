@@ -8,7 +8,7 @@
     <!-- Collegamento al CSS comune -->
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/feedback.css">
+    <link rel="stylesheet" href="./css/feedback.css" />
 
     <!-- Font (Outfit e Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
@@ -28,11 +28,41 @@
     <main>
       <!-- Qui il contenuto specifico della pagina -->
       <h2>Tell us how it's going</h2>
-      <p>
-        From 0 to 10, how likely are you to recommend EPICODE <br> to a friend or a
-        colleague?
+      <p id="p1">
+        From 0 to 10, how likely are you to recommend EPICODE <br />
+        to a friend or a colleague?
       </p>
-      <div>STELLE</div>
+     <div class="rating">
+  <input type="radio" id="stella10" name="rating">
+  <label for="stella10"></label>
+
+  <input type="radio" id="stella9" name="rating">
+  <label for="stella9"></label>
+
+  <input type="radio" id="stella8" name="rating">
+  <label for="stella8"></label>
+
+  <input type="radio" id="stella7" name="rating">
+  <label for="stella7"></label>
+
+  <input type="radio" id="stella6" name="rating">
+  <label for="stella6"></label>
+
+  <input type="radio" id="stella5" name="rating">
+  <label for="stella5"></label>
+
+  <input type="radio" id="stella4" name="rating">
+  <label for="stella4"></label>
+
+  <input type="radio" id="stella3" name="rating">
+  <label for="stella3"></label>
+
+  <input type="radio" id="stella2" name="rating">
+  <label for="stella2"></label>
+
+  <input type="radio" id="stella1" name="rating">
+  <label for="stella1"></label>
+</div>
       <p id="p2">Leave us an open feedback about your experience so far</p>
       <input type="text" placeholder="Write your comment here" />
     </main>
