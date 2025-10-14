@@ -10,8 +10,15 @@
   </head>
   <body>
     <header>
-      <img src="./assets/img/epicode_logo.png" alt="EPICODE" />
-      <p>Time left: <strong id="timer" aria-live="polite">--</strong>s</p>
+      <div class="header-flex">
+        <img src="./assets/epicode_logo.png" alt="EPICODE" />
+        <canvas
+          id="timerCanvas"
+          width="120"
+          height="120"
+          aria-label="Timer"
+        ></canvas>
+      </div>
     </header>
 
     <main>
@@ -20,17 +27,14 @@
 
         <!-- Contenitore risposte -->
         <div id="answers" role="radiogroup" aria-label="Answers"></div>
-
-        <div>
-          <button id="skipBtn" type="button">Skip</button>
-        </div>
-        <p id="progress">
-          Question <span id="qNum">0</span>/<span id="qTotal">0</span>
-        </p>
       </section>
     </main>
 
-    <footer></footer>
+    <footer>
+      <p id="progress">
+        QUESTION <span id="qNum">1</span> / <span id="qTotal">10</span>
+      </p>
+    </footer>
 
     <script type="module" src="./scripts/benchmark.js"></script>
   </body>

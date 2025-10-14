@@ -63,19 +63,6 @@ function showQuestion(index) {
 
   answersEl.innerHTML = ""; // Svuota il contenitore delle risposte
 
-  // Imposta il grid dinamicamente
-  if (answers.length === 2) {
-    answersEl.style.display = "grid";
-    answersEl.style.gridTemplateColumns = "1fr 1fr";
-    answersEl.style.gridTemplateRows = "1fr";
-  } else if (answers.length === 4) {
-    answersEl.style.display = "grid";
-    answersEl.style.gridTemplateColumns = "1fr 1fr";
-    answersEl.style.gridTemplateRows = "1fr 1fr";
-  } else {
-    answersEl.style.display = "block";
-  }
-
   answers.forEach((answer) => {
     const btn = document.createElement("button"); // Crea un bottone per ogni risposta
     btn.textContent = answer; // Mostra il testo della risposta sul bottone
@@ -112,15 +99,17 @@ function handleAnswer(btn, selected, correct) {
 
 // Mostra il risultato finale del quiz
 export function showResult() {
-  const total = questions.length;
-  const correct = score;
-  const wrong = total - correct;
-  const percent = Math.round((correct / total) * 100);
+  // Calcola i dati finali del quiz
+  const total = questions.length; // Numero totale di domande
+  const correct = score; // Numero di risposte corrette
+  const wrong = total - correct; // Numero di risposte sbagliate
+  const percent = Math.round((correct / total) * 100); // Percentuale di risposte corrette
 
-  // Salva i dati nel localStorage
+  // Salva i dati nel localStorage come stringa JSON
   localStorage.setItem(
-    "quizResults",
+    "quizResults", // Chiave con cui recuperare i dati
     JSON.stringify({
+      // Trasforma l'oggetto in stringa
       total,
       correct,
       wrong,
@@ -132,8 +121,8 @@ export function showResult() {
   questionEl.textContent = `Quiz finished! Your score: ${correct}/${total}`;
   answersEl.innerHTML = "";
 
-  // Vai alla pagina dei risultati
-  //window.location.href = "results.html";
+  // Per mostrare i risultati in una nuova pagina
+   window.location.href = "results.html";
 }
 
 // Funzione che può essere chiamata dal timer per ricominciare il quiz
