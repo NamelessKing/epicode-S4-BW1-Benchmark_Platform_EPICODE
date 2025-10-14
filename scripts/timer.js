@@ -11,7 +11,7 @@ export function startTimer() {
   clearInterval(timerInterval);
 
   // resetta il tempo a 60 secondi
-  tempoRimanente = 5;
+  tempoRimanente = 60;
   timerEl.textContent = `Tempo rimanente:  ${tempoRimanente}s`;
 
   // aggiorna ogni secondo

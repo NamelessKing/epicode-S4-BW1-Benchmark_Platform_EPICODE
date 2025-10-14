@@ -4,21 +4,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Benchmark</title>
-    <!-- <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/benchmark.css" /> -->
+    <link rel="stylesheet" href="./css/benchmark.css" />
   </head>
   <body>
     <header>
       <img src="./assets/img/epicode_logo.png" alt="EPICODE" />
+      <p>Time left: <strong id="timer" aria-live="polite">--</strong>s</p>
     </header>
 
     <main>
       <section>
-        <p>Time left: <strong id="timer" aria-live="polite">--</strong>s</p>
-        <p id="progress">
-          Question <span id="qNum">0</span>/<span id="qTotal">0</span>
-        </p>
         <h1 id="question">Loading…</h1>
 
         <!-- Contenitore risposte -->
@@ -27,6 +24,9 @@
         <div>
           <button id="skipBtn" type="button">Skip</button>
         </div>
+        <p id="progress">
+          Question <span id="qNum">0</span>/<span id="qTotal">0</span>
+        </p>
       </section>
     </main>
 
