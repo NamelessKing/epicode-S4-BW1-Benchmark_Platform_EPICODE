@@ -14,12 +14,12 @@ header p {
 #answers {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 10px; /* Riduci il gap per avvicinare i bottoni */
   max-width: 600px;
   margin: 40px auto;
 }
 
-#answers {
+.answer {
   background: linear-gradient(145deg, #1a1a2e, #232342);
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 40px;
@@ -32,12 +32,12 @@ header p {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-#answers:hover {
+.answer:hover {
   border-color: #ff00a8;
   box-shadow: 0 0 15px rgba(255, 0, 168, 0.4);
 }
 
-#answers.selected {
+.answer.selected {
   background: linear-gradient(145deg, #ff0080, #ff4dcc);
   border: none;
   box-shadow: 0 0 25px rgba(255, 0, 168, 0.6);
