@@ -129,11 +129,11 @@ export function showResult() {
   );
 
   // Mostra il risultato sulla pagina attuale (opzionale)
-  questionEl.textContent = `Quiz finished! Your score: ${correct}/${total}`;
-  answersEl.innerHTML = "";
+  // questionEl.textContent = `Quiz finished! Your score: ${correct}/${total}`;
+  // answersEl.innerHTML = "";
 
   // Vai alla pagina dei risultati
-  //window.location.href = "results.html";
+  window.location.href = "results.html";
 }
 
 // Funzione che può essere chiamata dal timer per ricominciare il quiz

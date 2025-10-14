@@ -7,7 +7,7 @@ const wrongSpan = document.getElementById("wrong");
 const totalSpan = document.getElementById("total");
 const totalSpan2 = document.getElementById("total2"); // L'altro span per il totale
 const correctPercentP = document.getElementById("percent");
-const wrongPercentP = document.getElementById("wrongPercent");
+const wrongPercentP = document.getElementById("wrongpercent");
 const circleContainer = document.getElementById("circle");
 const circleInner = document.querySelector(".circle-inner"); // Elemento interno del cerchio
 
@@ -64,8 +64,8 @@ if (
   // Imposta lo stile del cerchio esterno per creare il riempimento
   // Usiamo 'conic-gradient' per simulare il riempimento del cerchio.
   circleContainer.style.background = `conic-gradient(
-        #d20094 ${correctFillAngle}deg, 
-        #00ffff ${correctFillAngle}deg 360deg
+       #00ffff  ${correctFillAngle}deg, 
+        #d20094 ${correctFillAngle}deg 360deg
     )`;
 
   // Coloro i testi in base al risultato dato
