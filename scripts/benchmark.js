@@ -38,6 +38,7 @@
  */
 
 import questions from "./data.js"; // Importa le domande dal file data.js
+import { startTimer } from "./timer.js";
 
 let currentQuestion = 0; // Tiene traccia del numero della domanda attuale
 let score = 0; // Tiene traccia del punteggio dell'utente
@@ -67,6 +68,7 @@ function showQuestion(index) {
     btn.onclick = () => handleAnswer(answer, q.correct_answer); // Quando clicchi, controlla se è giusta
     answersEl.appendChild(btn); // Aggiunge il bottone al contenitore
   });
+  startTimer(); // Avvia il timer per ogni domanda
 }
 
 // Funzione che può essere chiamata dal timer per passare alla prossima domanda
@@ -86,7 +88,7 @@ function handleAnswer(selected, correct) {
 }
 
 // Mostra il risultato finale del quiz
-function showResult() {
+export function showResult() {
   const total = questions.length;
   const correct = score;
   const wrong = total - correct;
