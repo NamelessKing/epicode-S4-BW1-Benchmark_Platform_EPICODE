@@ -1,0 +1,35 @@
+
+main,
+footer {
+  text-align: center;
+}
+h2 {
+  margin-top: 39px;
+  font-size: 76px;
+    font-weight: 600;
+}
+.btn-blue {
+  margin-top: 35px;
+}
+p {
+  margin-top: 26px;
+  font-family: sans-serif;
+        line-height: 40px;
+
+          font-size: 28px;
+}
+#p2 {
+      margin-top: 140px;
+}
+input {
+  margin: 35px;
+  width: 740px;
+  border-bottom-color: #d20094;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  background-color: transparent;
+  padding-left: 20px;
+  color: white;
+  margin-top: 40px;
+}
