@@ -79,7 +79,7 @@ function showQuestion(index) {
   answers.forEach((answer) => {
     const btn = document.createElement("button"); // Crea un bottone per ogni risposta
     btn.textContent = answer; // Mostra il testo della risposta sul bottone
-    btn.classList.add("answers"); // Applica la classe CSS
+    btn.classList.add("answer"); // Applica la classe CSS
     btn.onclick = () => handleAnswer(btn, answer, q.correct_answer); // Quando clicchi, controlla se è giusta
     answersEl.appendChild(btn); // Aggiunge il bottone al contenitore
   });
