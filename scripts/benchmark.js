@@ -42,10 +42,23 @@ import { startTimer } from "./timer.js";
 
 //const results = JSON.parse(localStorage.getItem("questionsParameters"));
 
+console.log(window.location.href);
+
+// new URL(location.href).searchParams.get("year");
+// // Returns 2008 for href = "http://localhost/search.php?year=2008".
+// // Or in two steps:
+// const params = new URL(location.href).searchParams;
+// const year = params.get("year");
+
+const difficultyParams = new URL(window.location.href).searchParams;
+
 let results = {
-  amount: 5,
-  difficulty: "hard",
+  amount: parseInt(difficultyParams.get("amount")),
+  difficulty: difficultyParams.get("difficulty"),
 };
+
+console.log(results);
+
 const questions = await getData(results.amount, results.difficulty);
 
 let currentQuestion = 0; // Tiene traccia del numero della domanda attuale

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Benchmark</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="">
+        <img src="./assets/epicode_logo.png" alt="EPICODE" />
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div><h1>Select difficulty</h1></div>
+
+        <div>
+          <form action="./benchmark.html" method="GET">
+            <label class="container">
+              <b>Easy</b>
+              <input type="radio" name="difficulty" value="easy" />
+              <span class="checkmark"></span>
+            </label>
+
+            <label class="container">
+              <b>Medium</b>
+              <input type="radio" name="difficulty" value="medium" />
+              <span class="checkmark"></span>
+            </label>
+
+            <label class="container">
+              <b>Hard</b>
+              <input type="radio" name="difficulty" value="hard" />
+              <span class="checkmark"></span>
+            </label>
+
+            <br />
+
+            <label for="amount">Choose amount of questions:</label>
+            <select name="amount" id="amount" title="Select amount">
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+
+            <button type="submit" class="btn-blue">PROCEED</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer></footer>
+
+    <script type="module" src="./scripts/difficultySelector.js"></script>
+  </body>
+</html>
