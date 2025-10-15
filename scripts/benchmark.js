@@ -73,7 +73,8 @@ function showQuestion(index) {
   answers = answers.sort(() => Math.random() - 0.5); // Mischia le risposte in modo casuale
 
   answersEl.innerHTML = ""; // Svuota il contenitore delle risposte
-
+  const feedback = document.getElementById("feedback");
+  feedback.innerHTML = ``;
   answers.forEach((answer) => {
     const btn = document.createElement("button"); // Crea un bottone per ogni risposta
     btn.textContent = answer; // Mostra il testo della risposta sul bottone
@@ -104,10 +105,19 @@ function handleAnswer(btn, selected, correct) {
 
   btn.classList.add("selected"); // Evidenzia il bottone cliccato
 
-  if (selected === correct) score++;
-  setTimeout(nextQuestion, 800); // Passa alla prossima domanda dopo breve feedback
+  if (selected === correct) {
+    score++;
+    setTimeout(nextQuestion, 800); // Passa alla prossima domanda dopo breve feedback
+  } else {
+    const divEl = document.getElementById("feedback");
+    divEl.innerHTML = `<p>La risposta corretta è ${correct}</p>`;
+    // const correctAnsw = document.createElement("p"); //creo elemento paragraph
+    // correctAnsw.innerText = `La risposta corretta è:  ${q.correct_answer}`; //metto testo della risposta corretta dentro paragraph
+    // // correctAnsw.classList.add("answer"); //aggiungo CSS
+    // divEl.appendChild(correctAnsw); //appendo
+    setTimeout(nextQuestion, 5000);
+  }
 }
-
 // Mostra il risultato finale del quiz
 export function showResult() {
   // Calcola i dati finali del quiz
@@ -133,7 +143,7 @@ export function showResult() {
   answersEl.innerHTML = "";
 
   // Per mostrare i risultati in una nuova pagina
-   window.location.href = "results.html";
+  window.location.href = "results.html";
 }
 
 // Funzione che può essere chiamata dal timer per ricominciare il quiz
