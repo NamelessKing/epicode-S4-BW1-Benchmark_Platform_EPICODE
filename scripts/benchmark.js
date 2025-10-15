@@ -37,8 +37,16 @@
       // Se stai mostrando una domanda alla volta, aggiungi semplicemente un punto alla variabile del punteggio che hai precedentemente creato SE la risposta selezionata è === correct_answer
  */
 
-import questions from "./data.js"; // Importa le domande dal file data.js
+//import questions from "./data.js"; // Importa le domande dal file data.js
 import { startTimer } from "./timer.js";
+
+//const results = JSON.parse(localStorage.getItem("questionsParameters"));
+
+let results = {
+  amount: 5,
+  difficulty: "hard",
+};
+const questions = await getData(results.amount, results.difficulty);
 
 let currentQuestion = 0; // Tiene traccia del numero della domanda attuale
 let score = 0; // Tiene traccia del punteggio dell'utente
@@ -54,6 +62,9 @@ qTotal.textContent = questions.length; // Mostra il numero totale di domande
 // Mostra la domanda corrente e le possibili risposte
 function showQuestion(index) {
   const q = questions[index]; // Prende la domanda attuale dall'array
+
+  //console.log(q);
+
   qNum.textContent = index + 1; // Aggiorna il numero della domanda
   questionEl.textContent = q.question; // Mostra il testo della domanda
 
@@ -133,3 +144,19 @@ export function resetQuiz() {
 }
 
 showQuestion(currentQuestion); // Mostra la prima domanda quando la pagina si carica
+
+async function getData(amount = 10, difficulty = "easy") {
+  const url = `https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log(result.results);
+    return result.results;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
