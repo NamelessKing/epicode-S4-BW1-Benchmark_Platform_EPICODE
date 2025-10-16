@@ -37,29 +37,41 @@
       // Se stai mostrando una domanda alla volta, aggiungi semplicemente un punto alla variabile del punteggio che hai precedentemente creato SE la risposta selezionata è === correct_answer
  */
 
-//import questions from "./data.js"; // Importa le domande dal file data.js
+import { getDataFromApi } from "./data.js"; // Importa le domande dal file data.js
 import { startTimer } from "./timer.js";
-
-//const results = JSON.parse(localStorage.getItem("questionsParameters"));
-
-console.log(window.location.href);
-
-// new URL(location.href).searchParams.get("year");
-// // Returns 2008 for href = "http://localhost/search.php?year=2008".
-// // Or in two steps:
-// const params = new URL(location.href).searchParams;
-// const year = params.get("year");
 
 const difficultyParams = new URL(window.location.href).searchParams;
 
+// Prendo dalla barra degli indirizzi il numero di domande che l'utente vuole (amount)
+const amountParam = parseInt(difficultyParams.get("amount"));
+
+// Creo un oggetto con le impostazioni scelte dall'utente (numero domande e difficoltà)
 let results = {
-  amount: parseInt(difficultyParams.get("amount")),
-  difficulty: difficultyParams.get("difficulty"),
+  amount: amountParam, // quante domande vuole l'utente
+  difficulty: difficultyParams.get("difficulty"), // difficoltà scelta
 };
 
-console.log(results);
+// Preparo una variabile dove metterò le domande del quiz
+let questions = [];
 
-const questions = await getData(results.amount, results.difficulty);
+try {
+  // Chiedo le domande all'API (o al file locale) usando le impostazioni dell'utente
+  const data = await getDataFromApi(results.amount, results.difficulty);
+
+  // Se l'API restituisce direttamente un array di domande
+  if (Array.isArray(data)) {
+    questions = data; // salvo le domande
+    // Se invece restituisce un oggetto con una proprietà "results" che contiene le domande
+  } else if (data && Array.isArray(data.results)) {
+    questions = data.results; // salvo le domande
+  } else {
+    // Se non arrivano domande, avviso in console
+    console.warn("getDataFromApi returned no questions", data);
+  }
+} catch (err) {
+  // Se c'è un errore nel recuperare le domande, lo mostro in console
+  console.error("Errore fetching questions:", err);
+}
 
 let currentQuestion = 0; // Tiene traccia del numero della domanda attuale
 let score = 0; // Tiene traccia del punteggio dell'utente
@@ -70,13 +82,11 @@ const qTotal = document.getElementById("qTotal");
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
 
-qTotal.textContent = questions.length; // Mostra il numero totale di domande
+// qTotal.textContent = questions.length; // rimosso qui
 
 // Mostra la domanda corrente e le possibili risposte
 function showQuestion(index) {
   const q = questions[index]; // Prende la domanda attuale dall'array
-
-  //console.log(q);
 
   qNum.textContent = index + 1; // Aggiorna il numero della domanda
   questionEl.textContent = q.question; // Mostra il testo della domanda
@@ -166,20 +176,11 @@ export function resetQuiz() {
   showQuestion(currentQuestion); // Mostra la prima domanda
 }
 
-showQuestion(currentQuestion); // Mostra la prima domanda quando la pagina si carica
-
-async function getData(amount = 10, difficulty = "easy") {
-  const url = `https://opentdb.com/api.php?amount=${amount}&category=18&difficulty=${difficulty}`;
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    console.log(result.results);
-    return result.results;
-  } catch (error) {
-    console.error(error.message);
-  }
+// Alla fine del file, invece di chiamare showQuestion senza controlli:
+if (questions && questions.length > 0) {
+  qTotal.textContent = questions.length;
+  showQuestion(currentQuestion);
+} else {
+  questionEl.textContent = "Errore: nessuna domanda disponibile.";
+  answersEl.innerHTML = `<p>Controlla la connessione o i parametri della richiesta.</p>`;
 }

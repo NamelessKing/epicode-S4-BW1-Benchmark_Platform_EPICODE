@@ -93,4 +93,46 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
+
+export async function getDataFromApi(amount = 10, difficulty = "easy") {
+  // Controllo che amount sia un numero valido tra 1 e 10, altrimenti uso 10
+  const amt =
+    Number.isInteger(amount) && amount > 0 ? Math.min(amount, 10) : 10;
+
+  // Controllo che la difficoltà sia una tra quelle accettate, altrimenti uso "easy"
+  const diff = ["easy", "medium", "hard"].includes(difficulty)
+    ? difficulty
+    : "easy";
+
+  // Costruisco l'indirizzo da cui prendere le domande
+  const url = `https://opentdb.com/api.php?amount=${amt}&category=18&difficulty=${diff}`;
+
+  try {
+    // Chiedo le domande all'API
+    const response = await fetch(url);
+
+    // Se la risposta non è ok (ad esempio errore di rete), lancio un errore
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    // Trasformo la risposta in formato JSON
+    const result = await response.json();
+
+    // Se ci sono domande nell'oggetto ricevuto, le restituisco
+    if (result && Array.isArray(result.results) && result.results.length > 0) {
+      return result.results;
+    }
+
+    // Se non ci sono domande, avviso e restituisco quelle locali
+    console.warn(
+      "getDataFromApi: nessun risultato dall'API, uso fallback locale."
+    );
+    return questions;
+  } catch (error) {
+    // Se c'è un errore (ad esempio la connessione non funziona), avviso e restituisco quelle locali
+    console.error("getDataFromApi error:", error.message);
+    return questions; // fallback semplice per evitare undefined
+  }
+}
 export default questions;
