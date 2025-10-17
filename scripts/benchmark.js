@@ -133,12 +133,8 @@ function handleAnswer(btn, selected, correct) {
     setTimeout(nextQuestion, 800); // Passa alla prossima domanda dopo breve feedback
   } else {
     const divEl = document.getElementById("feedback");
-    divEl.innerHTML = `<p>La risposta corretta è ${correct}</p>`;
-    // const correctAnsw = document.createElement("p"); //creo elemento paragraph
-    // correctAnsw.innerText = `La risposta corretta è:  ${q.correct_answer}`; //metto testo della risposta corretta dentro paragraph
-    // // correctAnsw.classList.add("answer"); //aggiungo CSS
-    // divEl.appendChild(correctAnsw); //appendo
-    setTimeout(nextQuestion, 5000);
+    divEl.innerHTML = `La risposta corretta è <b>${correct}</b>`;
+    setTimeout(nextQuestion, 3000); // Passa alla prossima domanda dopo aver mostrato la risposta corretta
   }
 }
 // Mostra il risultato finale del quiz

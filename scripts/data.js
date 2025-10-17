@@ -94,45 +94,87 @@ const questions = [
   },
 ];
 
+/*
+  Converte le entità HTML (es. &quot;, &#039;) in caratteri normali (es. " e ')
+  - Se l'input non è una stringa, lo restituisce com'è (guard clause).
+  - Usa un <textarea> temporaneo: impostando innerHTML, il browser decodifica le entità.
+  - Legge il valore “pulito” da .value e lo ritorna.
+  Esempio: decodeHtml('The &quot;CPU&quot;') -> 'The "CPU"'
+*/
+function decodeHtml(str) {
+  if (typeof str !== "string") return str; // niente da fare se non è una stringa
+  const el = document.createElement("textarea"); // elemento temporaneo
+  el.innerHTML = str; // il browser decodifica le entità assegnate a innerHTML
+  return el.value; // testo decodificato
+}
+
+/*
+  Ritorna SEMPRE le domande locali (array questions) con i testi decodificati.
+  - Non filtra e non limita: usa tutto l'array locale così com'è.
+  - Crea un nuovo array con map (non modifica l’originale).
+  - Decodifica: domanda, risposta corretta e ogni risposta errata.
+  Utile come "piano B" quando l’API non risponde o torna entità HTML.
+*/
+function getLocalQuestionsDecoded() {
+  return questions.map((q) => ({
+    ...q, // copia tutte le proprietà originali (category, type, difficulty, ecc.)
+    question: decodeHtml(q.question), // decodifica il testo della domanda
+    correct_answer: decodeHtml(q.correct_answer), // decodifica la risposta corretta
+    incorrect_answers: q.incorrect_answers.map((a) => decodeHtml(a)), // decodifica ogni risposta errata
+  }));
+}
+
 export async function getDataFromApi(amount = 10, difficulty = "easy") {
-  // Controllo che amount sia un numero valido tra 1 e 10, altrimenti uso 10
+  // 1) Metto in sicurezza "amount":
+  //    - deve essere un intero positivo
+  //    - non deve superare il massimo consentito (10)
+  //    - se non è valido, uso 10 come valore di default
   const amt =
     Number.isInteger(amount) && amount > 0 ? Math.min(amount, 10) : 10;
 
-  // Controllo che la difficoltà sia una tra quelle accettate, altrimenti uso "easy"
+  // 2) Metto in sicurezza "difficulty":
+  //    - accetto solo i valori previsti
+  //    - se arriva qualcosa di diverso, imposto "easy"
   const diff = ["easy", "medium", "hard"].includes(difficulty)
     ? difficulty
     : "easy";
 
-  // Costruisco l'indirizzo da cui prendere le domande
+  // 3) Costruisco l'URL dell'API con i parametri scelti
   const url = `https://opentdb.com/api.php?amount=${amt}&category=18&difficulty=${diff}`;
 
   try {
-    // Chiedo le domande all'API
+    // 4) Chiamo l'API
     const response = await fetch(url);
 
-    // Se la risposta non è ok (ad esempio errore di rete), lancio un errore
+    // 5) Se il server risponde con un errore (es. 404/500), interrompo con un errore
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}`);
     }
 
-    // Trasformo la risposta in formato JSON
+    // 6) Converto la risposta in JSON
     const result = await response.json();
 
-    // Se ci sono domande nell'oggetto ricevuto, le restituisco
+    // 7) Se ci sono domande nell'array "results"
     if (result && Array.isArray(result.results) && result.results.length > 0) {
-      return result.results;
+      // 8) Normalizzo i testi decodificando le entità HTML (es. &quot; -> ")
+      const cleaned = result.results.map((q) => ({
+        ...q,
+        question: decodeHtml(q.question),
+        correct_answer: decodeHtml(q.correct_answer),
+        incorrect_answers: q.incorrect_answers.map((a) => decodeHtml(a)),
+      }));
+
+      // 9) Ritorno le domande pulite
+      return cleaned;
     }
 
-    // Se non ci sono domande, avviso e restituisco quelle locali
-    console.warn(
-      "getDataFromApi: nessun risultato dall'API, uso fallback locale."
-    );
-    return questions;
+    // 10) Se l'API non ha restituito domande, uso il fallback locale (senza filtri)
+    console.warn("API vuota: uso il fallback locale (senza filtri).");
+    return getLocalQuestionsDecoded();
   } catch (error) {
-    // Se c'è un errore (ad esempio la connessione non funziona), avviso e restituisco quelle locali
+    // 11) In caso di errore di rete o altro, loggo e ritorno il fallback locale
     console.error("getDataFromApi error:", error.message);
-    return questions; // fallback semplice per evitare undefined
+    return getLocalQuestionsDecoded();
   }
 }
 export default questions;
